@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace UIExtensionsLoader.XML.Config
 {
-    internal class ConfigFileXML
+    public class ConfigFileXML
     {
         [XmlRoot(ElementName = "Panel")]
         public class Panel

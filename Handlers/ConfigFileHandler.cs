@@ -10,7 +10,7 @@ using UIExtensionsLoader.XML.Config;
 
 namespace UIExtensionsLoader.Handlers
 {
-    internal class ConfigFileHandler
+    public class ConfigFileHandler
     {
 
         public ConfigFileXML.Panel FoundPanel;

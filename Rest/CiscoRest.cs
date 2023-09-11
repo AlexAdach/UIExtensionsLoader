@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UIExtensionsLoader.Rest
 {
-    internal class CiscoRest : IDisposable
+    public class CiscoRest : IDisposable
     {
         public RestClient Client;
         private bool disposedValue;

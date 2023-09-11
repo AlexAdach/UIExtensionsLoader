@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace UIExtensionsLoader.XML.XAPI.PanelRemove
 {
-    internal class PanelRemoveXml
+    public class PanelRemoveXml
     {
         public static Command GetCommand(string panelID)
         {

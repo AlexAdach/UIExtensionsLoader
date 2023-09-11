@@ -13,7 +13,7 @@ using UIExtensionsLoader.XML.XAPI.PanelRemove;
 
 namespace UIExtensionsLoader.Handlers
 {
-    internal class ExtensionsHandler
+    public class ExtensionsHandler
     {
 
         private CiscoRest _client;

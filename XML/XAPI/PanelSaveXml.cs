@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace UIExtensionsLoader.XML.XAPI.PanelSave
 {
-    internal class PanelSaveXml
+    public class PanelSaveXml
     {
 
 

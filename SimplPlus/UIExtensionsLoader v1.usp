@@ -1,0 +1,192 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name: Tritech
+System Name:
+System Number:
+Programmer: Alex Adach
+Comments: 
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+// #CATEGORY "" 
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+// #OUTPUT_SHIFT 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+//#INCLUDEPATH "C:\git\UIExtensionsLoader\UIExtensionsLoader\bin\Debug"
+
+// #ENCODING_ASCII
+// #ENCODING_UTF16
+// #ENCODING_INHERIT_FROM_PARENT
+// #ENCODING_INHERIT_FROM_PROGRAM
+/*
+#HELP_BEGIN
+   (add additional lines of help lines)
+#HELP_END
+*/
+
+/*******************************************************************************************
+  Include Libraries
+  (Uncomment and include additional libraries as needed)
+*******************************************************************************************/
+// #CRESTRON_LIBRARY ""
+// #USER_LIBRARY ""
+#USER_SIMPLSHARP_LIBRARY "UIExtensionsLoader"
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+DIGITAL_INPUT Load;
+// ANALOG_INPUT 
+STRING_INPUT  	Host[40];
+				
+// BUFFER_INPUT 
+
+DIGITAL_OUTPUT 	Success_fb,
+				Error_fb; 
+// ANALOG_OUTPUT 
+STRING_OUTPUT	Debug_Message_Fb; 
+
+/*******************************************************************************************
+  SOCKETS
+  (Uncomment and define socket definitions as needed)
+*******************************************************************************************/
+// TCP_CLIENT
+// TCP_SERVER
+// UDP_SOCKET
+
+/*******************************************************************************************
+  Parameters
+  (Uncomment and declare parameters as needed)
+*******************************************************************************************/
+// INTEGER_PARAMETER
+// SIGNED_INTEGER_PARAMETER
+// LONG_INTEGER_PARAMETER
+// SIGNED_LONG_INTEGER_PARAMETER
+String_Parameter 	_skip_, _skip_, _skip_, _skip_, _skip_, _skip_, 
+					Username[40],
+					Password[40],
+					FilePath[100],
+					TargetPanelID[40],
+					ControlPanelPrefix[40];
+/*******************************************************************************************
+  Parameter Properties
+  (Uncomment and declare parameter properties as needed)
+*******************************************************************************************/
+/*
+#BEGIN_PARAMETER_PROPERTIES parameter_variable, parameter_variable, ...
+   // propValidUnits = // unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;
+   // propDefaultUnit = // unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime or unitTicks;
+   // propBounds = lower_bound , upper_bound;
+   // propDefaultValue = ;  // or, propDefaultValue = "";
+   // propList = // { "value" , "label" } , { "value" , "label" } , ... ;
+   // propShortDescription = "status_bar_hint_text";
+   // #BEGIN_PROP_FULL_DESCRIPTION  line_1...  line_2...  line_n  #END_PROP_FULL_DESCRIPTION
+   // #BEGIN_PROP_NOTES line_1...  line_2...  line_n  #END_PROP_NOTES
+#END_PARAMETER_PROPERTIES
+*/
+
+/*******************************************************************************************
+  Structure Definitions
+  (Uncomment and define structure definitions as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: struct.myString = "";
+*******************************************************************************************/
+/*
+STRUCTURE MyStruct1
+{
+};
+
+MyStruct1 struct;
+*/
+SimplPlusModule Module;
+/*******************************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: myString = "";
+*******************************************************************************************/
+// INTEGER
+// LONG_INTEGER
+// SIGNED_INTEGER
+// SIGNED_LONG_INTEGER
+// STRING
+
+/*******************************************************************************************
+  Functions
+  (Add any additional functions here)
+  Note:  Functions must be physically placed before the location in
+         the code that calls them.
+*******************************************************************************************/
+
+Callback Function SuccessDelegateCallback(string message)
+{
+    Debug_Message_fb = message;
+}
+
+Callback Function ErrorDelegateCallback(string message)
+{
+	Debug_Message_fb = message;
+}
+
+/*******************************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+
+PUSH Load
+{
+	integer i;
+	
+	Error_fb = 0;
+	Success_fb = 0;
+                             
+
+	Module.Host = Host;
+	Module.Username = Username;
+	Module.Password = Password;
+	Module.FilePath = FilePath;
+	Module.TargetPanelId = TargetPanelId;
+	Module.ControlPanelPrefix = ControlPanelPrefix;
+
+
+	i = Module.LoadConfigGo();
+	
+	if(i = 0)
+		Error_fb = 1;
+	else if(i = 1)
+		Success_fb = 1;
+}
+
+/*******************************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+*******************************************************************************************/
+
+Function Main()
+{
+
+	RegisterDelegate(SimplDebug, SuccessDelegateHandler, SuccessDelegateCallback);
+	RegisterDelegate(SimplDebug, ErrorDelegateHandler, ErrorDelegateCallback);
+
+
+}
+
+

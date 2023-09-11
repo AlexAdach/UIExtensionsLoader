@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace UIExtensionsLoader.XML.XAPI.ExtensionsList
 {
-    internal class ExtensionsListXml
+    public class ExtensionsListXml
     {
         public static Command GetCommand
         {
@@ -55,7 +55,7 @@ namespace UIExtensionsLoader.XML.XAPI.ExtensionsList
 }
     namespace UIExtensionsLoader.XML.XAPI.ExtensionsListResult
     {
-        internal class ExtensionsListResultXml
+        public class ExtensionsListResultXml
         {
 
             [XmlRoot(ElementName = "Widget")]
